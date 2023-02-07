@@ -4,9 +4,11 @@ This is my first personal project in [Reinforcement Learning](https://en.wikiped
 
 ## Results
 At the end of training, I got an agent that could get an average reward of $1600$. From manual testing, it usually gets a total reward of $3000$. The graph below shows the progress of the agent as it learns.  
+  
 <img src="reward_graph.png"  width="400" height="250">
 
 And this is a sample of a game that the agent wins.  
+  
 <img src="demo/mario_success.gif"  width="256" height="240">
 
 
@@ -14,17 +16,19 @@ And this is a sample of a game that the agent wins.
 I started this project a week ago and focused on it for a week by the time I wrote this. It is really challenging to built the RL agent. One of the reasons is due to the sensitivity of PPO to hyperparameter. I tried changing a lot of things including:
 - Wrappers: I tried some other things that were not used in the end such as TimeLimitWrapper, NoopResetEnv, NormalizeWrapper, etc
 - Hyperparameters: Most notably n_steps, batch_size, learning_rate, ent_coef, n_epochs, and gamma.
-- CNN model: I tried a deeper layer, but failed. I also tried using dropout and normalization until I researched that adding those to RL would hurt more than it helps the agent.
+- CNN model: I tried a deeper layer, but failed. I also tried using dropout and normalization until I researched that adding those to RL would hurt more than it helps the agent.  
+
 Before succeeding this version, I tried the v3 version which is the pixelated version. This version is easier for the RL agent to learn since the sprites are simpler. (everything is in blocks) I suggest that you try this first before the original version.  
 On the failed attempts, the agent struggles a lot on pitfalls (maybe since they appear lesser) and the first pipes. (since the agent needs to learn to 'hold' jump)
 It is also very common for the agent to learn well in the beginning before drastically decreasing its performance. (Watching the graph is like seeing the stock rising and falling)
 
 
 ## File Details
-You can use the `train-mario.py` to train the agent on your own. You can also change the number of timesteps.  
-You can see the whole training statistics by running a tensorboard on the folder `mario-tensorboard`.  
-To test it, run the `test-mario.py` file. By default if runs $N=10$ tries that the agent plays and gives the overall average. (change the $N$ as you see fit)  
-Finally, you can see the test result as GIF on the folder `demo`.
+- To run everything, make sure that all the pip requirement from `requirement.txt` is satifies.
+- You can use the `train-mario.py` to train the agent on your own. You can also change the number of timesteps.  
+- You can see the whole training statistics by running a tensorboard on the folder `mario-tensorboard`.  
+- To test it, run the `test-mario.py` file. By default if runs $N=10$ tries that the agent plays and gives the overall average. (change the $N$ as you see fit)  
+- Finally, you can see the test result as GIF on the folder `demo`.
 
 
 ## Implementation Details
@@ -50,13 +54,13 @@ After trying out a lot (and I mean A LOT) of combinations of hyperparameters, th
 
 ### CNN Feature Extractor
 It is impossible to store every different possible image pixels. Instead, I used a [Convolutional Neural Network](https://en.wikipedia.org/wiki/Convolutional_neural_network) to transform the 2d image pixels into an array of $512$ float numbers. From here, the agent will process it again to get the probabilities of actions, taking the highest value probability as an action. The details of the CNN layers are as follows.
-- 2d Conv Layer (in_channels:num_inputs, out_channels:32, kernel_size:8, stride:4, activation: ReLu)
-- Max Pool Layer (2x2)
-- 2d Conv Layer (in_channels:32, out_channels:64, kernel_size:4, stride:2, activation: ReLu)
-- 2d Conv Layer (in_channels:64, out_channels:64, kernel_size:3, stride:1, activation: ReLu)
-- Flatten Layer
-- Linear Layer (in_features:n_flatten, out_features:features_dim)
-The whole CNN is built using torch with the default Adam optimizer.
+- `2d Conv Layer` (in_channels:num_inputs, out_channels:32, kernel_size:8, stride:4, activation: ReLu)
+- `Max Pool Layer` (2x2)
+- `2d Conv Layer` (in_channels:32, out_channels:64, kernel_size:4, stride:2, activation: ReLu)
+- `2d Conv Layer` (in_channels:64, out_channels:64, kernel_size:3, stride:1, activation: ReLu)
+- `Flatten Layer`
+- `Linear Layer` (in_features:n_flatten, out_features:features_dim)
+The whole CNN is built using [torch](https://pytorch.org/) library with the default Adam optimizer.
 
 
 ## Future Improvements
