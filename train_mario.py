@@ -202,7 +202,7 @@ model = PPO('CnnPolicy', env, verbose=1, tensorboard_log="./mario_tensorboard/",
             ent_coef=0.01,
             n_epochs=20,
             )
-N = 10
+N = 6
 TIMESTEPS = 50_000
 
 for i in range(1,N+1):
