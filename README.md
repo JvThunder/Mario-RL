@@ -14,7 +14,7 @@ And this is a sample of a game that the agent wins.
 
 ## Struggles
 I started this project a week ago and focused on it for a week by the time I wrote this. It is really challenging to built the RL agent. One of the reasons is due to the sensitivity of PPO to hyperparameter. I tried changing a lot of things including:
-- Wrappers: I tried some other things that were not used in the end such as TimeLimitWrapper, NoopResetEnv, NormalizeWrapper, etc
+- Wrappers: I tried some other things that were not used in the end such as TimeLimitWrapper, NoopResetEnv, NormalizeWrapper, CustomReward, etc
 - Hyperparameters: Most notably n_steps, batch_size, learning_rate, ent_coef, n_epochs, and gamma.
 - CNN model: I tried a deeper layer, but failed. I also tried using dropout and normalization until I researched that adding those to RL would hurt more than it helps the agent.  
 
