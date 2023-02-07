@@ -1,5 +1,5 @@
 # Mario RL
-This is my first personal project in [Reinforcement Learning](https://en.wikipedia.org/wiki/Reinforcement_learning), which is a way to build a self-learning AI to play in an environment. For this project, the current environment is the classic Mario NES 1-1 provided by this [pip install](https://pypi.org/project/gym-super-mario-bros/). I used a Proximal Policy Optimization with the [stable baselines 3 library](https://stable-baselines3.readthedocs.io/en/master/). Although many people have made a similar project, I have not seen one that uses the stable baseline's PPO algorithm (some even uses other RL methods like DDQN), which is why I want to try using it. I am glad that it finally works. MOst importantly, I have learned a lot along the way.
+This is my first personal project in [Reinforcement Learning](https://en.wikipedia.org/wiki/Reinforcement_learning), which is a way to build a self-learning AI to play in an environment. For this project, the current environment is the classic Mario NES 1-1 provided by this [pip install](https://pypi.org/project/gym-super-mario-bros/). I used a Proximal Policy Optimization with the [stable baselines 3 library](https://stable-baselines3.readthedocs.io/en/master/). Although many people have made a similar project, I have not seen one that uses the stable baseline's PPO algorithm (some even uses other RL methods like DDQN), which is why I want to try using it. I am glad that it finally works. Most importantly, I have learned a lot along the way.
 
 
 ## Results
@@ -20,7 +20,16 @@ On the failed attempts, the agent struggles a lot on pitfalls (maybe since they 
 It is also very common for the agent to learn well in the beginning before drastically decreasing its performance. (Watching the graph is like seeing the stock rising and falling)
 
 
+## File Details
+You can use the `train-mario.py` to train the agent on your own. You can also change the number of timesteps.  
+You can see the whole training statistics by running a tensorboard on the folder `mario-tensorboard`.  
+To test it, run the `test-mario.py` file. By default if runs $N=10$ tries that the agent plays and gives the overall average. (change the $N$ as you see fit)  
+Finally, you can see the test result as GIF on the folder `demo`.
+
+
 ## Implementation Details
+### Training Setup
+I ran the training on a RTX-3090 GPU. The number of training timesteps I used is $300k$ timesteps with a saving checkpoint interval of $50k$. It took the GPU only $90$ minutes to finish.
 ### Wrappers
 I used a total on $6$ wrappers to help increase the training convergence. Wrappers are functions that modifies the observations, actions and rewards. The list below explains each of the wrappers functionality.
 - `ResizeObservation`: Used to resize the observation to a smaller and square shape. In this case, I reshape the observation to an 84x84 array. This is to reduce the amount of time needed for the CNN to train.
@@ -48,16 +57,6 @@ It is impossible to store every different possible image pixels. Instead, I used
 - Flatten Layer
 - Linear Layer (in_features:n_flatten, out_features:features_dim)
 The whole CNN is built using torch with the default Adam optimizer.
-
-### Training Setup
-I ran the training on a RTX-3090 GPU. The number of training timesteps I used is $300k$ timesteps with a saving checkpoint interval of $50k$. It took the GPU only $90$ minutes to finish.
-
-
-## File Details
-You can use the `train-mario.py` to train the agent on your own. You can also change the number of timesteps.  
-You can see the whole training statistics by running a tensorboard on the folder `mario-tensorboard`.  
-To test it, run the `test-mario.py` file. By default if runs $N=10$ tries that the agent plays and gives the overall average. (change the $N$ as you see fit)  
-Finally, you can see the test result as GIF on the folder `demo`.
 
 
 ## Future Improvements
