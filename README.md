@@ -24,7 +24,7 @@ It is also very common for the agent to learn well in the beginning before drast
 
 
 ## File Details
-- To run everything, make sure that all the pip requirement from `requirement.txt` is satifies.
+- To run everything, make sure that all the pip requirement from `requirements.txt` is satified.
 - You can use the `train-mario.py` to train the agent on your own. You can also change the number of timesteps.  
 - You can see the whole training statistics by running a tensorboard on the folder `mario-tensorboard`.  
 - To test it, run the `test-mario.py` file. By default if runs $N=10$ tries that the agent plays and gives the overall average. (change the $N$ as you see fit)  
